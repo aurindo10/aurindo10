@@ -64,13 +64,19 @@ const comparador = {
 
 
 
-            const sellersName = cotacoes.map((e)=>{return {vendedor: e.vendedor, produtos: listall.filter((u)=>{
+            const sellersName = cotacoes.map((e)=>{return {
+                vendedor: e.vendedor,
+                 cotacao_id:e.cotacao_id, 
+                 listOfProducts: listall.filter((u)=>{
                 return u.seller === e.vendedor
 
             })}})
 
         console.log(sellersName)
 
+
+            const newBuyList  =  new Listcomparada (sellersName)
+            await newBuyList.save()
         res.send(sellersName)
 
         
