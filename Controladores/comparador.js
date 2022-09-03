@@ -1,6 +1,6 @@
 
 const PriceList = require('../Models/priceList')
-// const Listcomparada = require('../Models/listcotada')
+const Listcomparada = require('../Models/listcotada')
 
 
 
@@ -74,11 +74,13 @@ const comparador = {
 
         console.log(sellersName)
 
-
-            const newBuyList  =  new Listcomparada (sellersName)
-            await newBuyList.save()
-        res.send(sellersName)
-
+         for (i=0;i<sellersName.length; i++){
+                if (sellersName[i].listOfProducts[0]){
+                    const newBuyList  =  new Listcomparada (sellersName[i])
+                    newBuyList.save()
+                    res.send(newBuyList)
+                }
+        }
         
     }
 

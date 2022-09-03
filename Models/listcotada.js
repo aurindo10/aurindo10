@@ -23,4 +23,4 @@ const priceListSchema  = mongoose.Schema({
         listOfProducts: [productOfList]
     })
 
-module.exports = mongoose.model('Listcomparada', listcomparada)
+module.exports = mongoose.model('Listcomparada', priceListSchema)
