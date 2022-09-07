@@ -6,6 +6,7 @@ const bodyParser = require ('body-parser');
 const path = require ('path')
 const cors = require('cors')
 const cotacao = require('./rotas/Listofcaotacoes')
+const login = require ('./rotas/login')
 const mongoose = require('mongoose');
 mongoose.connect('mongodb+srv://aurindo:88190207@cluster0.llc5fu0.mongodb.net/?retryWrites=true&w=majority',(error)=>{ 
     if (error) 
@@ -17,6 +18,7 @@ mongoose.connect('mongodb+srv://aurindo:88190207@cluster0.llc5fu0.mongodb.net/?r
 
 app.use(cors());
 app.use(morgan('dev'));
+app.use ('/', express.json(), (login))
 app.use ('/produto',express.json(), (produto));
 app.use ('/cotacoes',express.json(), (cotacao));
 app.use ((req, res, next) => {

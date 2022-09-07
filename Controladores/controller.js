@@ -17,6 +17,7 @@ const CadastroProduto = {
 
     }catch (error) {
         res.status(400).send(error)}},
+        
     criarListdeCotação: async (req, res)=>{
         const cotacao = new Cotacao ({
             cotacaoName: req.body.cotacaoName,
