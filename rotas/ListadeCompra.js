@@ -15,5 +15,6 @@ router.post('/editlist/:idlist/:id', express.urlencoded({extended:true}), contro
 router.post('/updatedelista/:id', express.urlencoded({extended:true}), controller.editListCotacao)
 router.post('/criacaodelista', express.urlencoded({extended:true}), controller.criacaodelista)
 router.get('/cotacoes/', express.urlencoded({extended:true}), controller.ObtemListofLists)
+router.delete('/cotacoes/:id/:id_product', express.urlencoded({extended:true}), controller.deleteproductofcotacao)
 
 module.exports = router;

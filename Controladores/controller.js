@@ -45,8 +45,9 @@ const CadastroProduto = {
             if (err) {
               throw err;
             }
+            res.send (update.$push.products)
         })
-        res.send ("Produto cadastrado na lista")
+        
     },
     ObtemProdutosDaLista: async (req, res)=>{
 
@@ -149,6 +150,14 @@ const CadastroProduto = {
                     res.send(err)
                 }
                 res.send(doc)
-    })}
+    })},
+    deleteproductofcotacao: async (req, res)=>{
+        const idList = req.params.id
+        const idProduct = req.params.id_product
+            Cotacao.updateOne({_id:idList}, {
+                $pullAll: {
+                    produto_id: [{_id: idProduct}],
+                }}
+                )}
 }
 module.exports = CadastroProduto;

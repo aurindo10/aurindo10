@@ -47,7 +47,7 @@ app.use((error, req, res, next) => {
     })
 })
 app.use ((req, res, next) => {
-    const erro = new Error ('não encontrato');
+    const erro = new Error ('não encontrato')   ;
     erro.status = 404;
     next(erro);
 })
