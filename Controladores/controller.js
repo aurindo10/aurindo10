@@ -44,8 +44,11 @@ const CadastroProduto = {
         Cotacao.findOneAndUpdate(query, update,options, (err, doc) =>{ 
             if (err) {
               throw err;
+              
             }
-            res.send (update.$push.products)
+            console.log(doc)
+            res.status(200).send(doc.products[doc.products.length-1])
+            // res.send (update.$push.products)
         })
         
     },
@@ -154,17 +157,9 @@ const CadastroProduto = {
     deleteproductofcotacao: async (req, res)=>{
         const idList = req.params.id
         const idProduct = req.params.id_product
-        // try {
-        //     Cotacao.findOneAndUpdate({_id:idList}, {$pullAll: {
-        //     products:[{_id: idProduct}]}});
-        //     res.send("Produto Deletado com sucesso")
-        //     }
-        //     catch(error){
-        //         res.status(400).send(error)}
-        //     }
         Cotacao.findOneAndUpdate({ _id: idList }, { "$pull": { "products": { "_id": idProduct } }}, { safe: true, multi:true }, function(err, obj) {
             if(err) res.status(400).send(err)          
-            res.send("Produto Deletado com sucesso")
+            res.send(obj)
 
         });}
         
