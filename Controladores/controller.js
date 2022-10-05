@@ -154,16 +154,19 @@ const CadastroProduto = {
     deleteproductofcotacao: async (req, res)=>{
         const idList = req.params.id
         const idProduct = req.params.id_product
-        try {
-            Cotacao.updateOne({_id:idList}, {
-                $pullAll: {
-                    produto_id: [{_id: idProduct}],
-                }}
-                )
+        // try {
+        //     Cotacao.findOneAndUpdate({_id:idList}, {$pullAll: {
+        //     products:[{_id: idProduct}]}});
+        //     res.send("Produto Deletado com sucesso")
+        //     }
+        //     catch(error){
+        //         res.status(400).send(error)}
+        //     }
+        Cotacao.findOneAndUpdate({ _id: idList }, { "$pull": { "products": { "_id": idProduct } }}, { safe: true, multi:true }, function(err, obj) {
+            if(err) res.status(400).send(err)          
             res.send("Produto Deletado com sucesso")
-            }catch(error){
-                res.status(400).send(error)}
-            }
+
+        });}
         
 }
 module.exports = CadastroProduto;
