@@ -4,6 +4,7 @@ const cadastroListofPrice =  {
     
 cadastro: async(req, res)=>{
     const update = req.body
+    console.log(update)
     const data =  new PriceList (update)
 try{
             const savedProduct = await data.save()
