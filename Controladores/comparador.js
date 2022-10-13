@@ -16,7 +16,7 @@ const comparador = {
 
 
         const minPrices = productsInArrayofArrayById.map ( (e)=>{
-            const checker = (o, i) => typeof(o) === 'object'
+            const checker = (o, i) => typeof(o) === 'object' 
             return (e.length && e.reduce(function(prev, curr){
                 const prevOk = checker(prev, curr);
                 const currOk = checker(curr, curr);

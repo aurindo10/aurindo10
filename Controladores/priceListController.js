@@ -1,4 +1,5 @@
 const PriceList = require('../Models/priceList')
+const Vendedor = require('../Models/vendedor')
 
 const cadastroListofPrice =  {
     
@@ -48,7 +49,18 @@ deletelist:  async(req, res)=>{
             }
             res.send(doc)
         })
-    }
+    },
+cadastraVendedor:  async(req, res)=>{
+    const update = req.body
+     console.log(update)
+     const data =  new Vendedor (update)
+try{
+    const savedProduct = await data.save()
+    res.send(savedProduct)
+}
+catch(error){
+    res.status(400).send(error)}
+}
 }
 
 
