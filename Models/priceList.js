@@ -8,8 +8,8 @@ const productOfList = mongoose.Schema({
     unidade: {type: String, required: true, minlength: 1, maxlenght: 3},
     quantidade: {type: Number, required: true},
     valorUnitario: {type: Number, required: true},
-    quantidadeMinima: {type: Number, required: true}})
-    
+    quantidadeMinima: {type: Number, required: true},
+    vendedorId: {type: String, required: true}})
 
 
 
