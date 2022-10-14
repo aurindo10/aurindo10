@@ -1,5 +1,6 @@
 const PriceList = require('../Models/priceList')
 const Listcomparada = require('../Models/listcotada')
+const Vendedor = require('../Models/vendedor')
 
 
 const comparador = {
@@ -25,10 +26,29 @@ const comparador = {
                 return prev.valorUnitario < curr.valorUnitario ? prev : curr; 
             })) || null;
          })
-         console.log(idOfEachSeller)
+
          const ListReady = idOfEachSeller.map((i)=>{return (minPrices.filter((e)=>{return e.vendedorId === i}))})
-         res.send(ListReady)
-    }
-}
+         const VendedorFromDB = await Vendedor.find({})
+         const ListReadyToSend = idOfEachSeller.map((e)=>{return VendedorFromDB.filter((i)=>{return i._id == e})}).flat(1)
+         const FinalList = ListReadyToSend.map((seller)=>{return {
+            nomeDoVendedor: seller.nome ,
+            empresa: seller.empresa,
+            ProductListToBuy: minPrices.filter((sellerProduct)=>{return sellerProduct.vendedorId == seller._id})}})
+        console.log(FinalList)
+
+
+        const data =  new Listcomparada ({listas:FinalList})
+        // res.send(FinalList)
+
+
+         try{
+                     const savedList = await data.save()
+                     res.send(savedList)
+             }
+         catch(error){
+             res.status(400).send(error)
+         }
+    
+}}
 
 module.exports = comparador

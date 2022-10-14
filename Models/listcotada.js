@@ -4,23 +4,26 @@ const mongoose = require('mongoose') ;
 
 const productOfList = mongoose.Schema({
 
-    seller: {type: String, required: true, minlength: 3, maxlenght: 50},
-    produtos : { 
-    productName: {type: String, required: true, minlength: 3, maxlenght: 100},
-    product_id: {type: String, required: true, minlength: 3, maxlenght: 100},
-    unidade: {type: String, required: true, minlength: 1, maxlenght: 3},
+    productName: {type: String, required: true, minlength: 3, maxlenght: 50},
+    product_id : {type: String, required: true, minlength: 3, maxlenght: 50},
+    unidade: {type: String, required: true, minlength: 1, maxlenght: 100},
+    quantidade: {type: Number, required: true},
     valorUnitario: {type: Number, required: true},
-    quantidadeMínima: {type: Number, required: true},
-    quantidade: {type: String, required: true}}}) 
+    quantidadeMinima: {type: Number, required: true},
+    vendedorId: {type: String, required: true, minlength: 3, maxlenght: 50},
+    _id: {type: String, minlength: 3, maxlenght: 50}}) 
 
 
 
 const priceListSchema  = mongoose.Schema({
         
-        vendedor: {type: String, required: true, minlength: 3, maxlenght: 50},
-        cotacao_id: {type: String, required: true, minlength: 3, maxlenght: 100},
+        nomeDoVendedor: {type: String, required: true, minlength: 3, maxlenght: 50},
+        empresa: {type: String, required: true, minlength: 1, maxlenght: 50},
         createdAt: {type: Date, default: Date.now},
-        listOfProducts: [productOfList]
+        ProductListToBuy: [productOfList]
     })
+const ListaPronta = mongoose.Schema({listas:[priceListSchema]})
 
-module.exports = mongoose.model('Listcomparada', priceListSchema)
+
+
+module.exports = mongoose.model('Listcomparada', ListaPronta)
