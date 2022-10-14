@@ -11,6 +11,8 @@ router.post('/listdepreco/:id', express.urlencoded({extended:true}), controller.
 router.delete('/listdepreco/:id', express.urlencoded({extended:true}), controller.deletelist)
 router.get('/compara/:id', express.urlencoded({extended:true}), comparador.compara)
 router.put('/cadastravendedor', express.urlencoded({extended:true}), controller.cadastraVendedor)
+router.get('/obtemlistacomparada/:id', express.urlencoded({extended:true}), comparador.getListReadyById)
+router.get('/obtemtodaslistacomparadas', express.urlencoded({extended:true}), comparador.getListsReady)
 
 
 

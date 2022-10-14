@@ -22,7 +22,11 @@ const priceListSchema  = mongoose.Schema({
         createdAt: {type: Date, default: Date.now},
         ProductListToBuy: [productOfList]
     })
-const ListaPronta = mongoose.Schema({listas:[priceListSchema]})
+const ListaPronta = mongoose.Schema({
+    nomeDaCotacao: {type: String, required: true, minlength: 1, maxlenght: 50},
+    listas:[priceListSchema],
+    idCotacao: {type: String, required: true, minlength: 1, maxlenght: 50}
+})
 
 
 

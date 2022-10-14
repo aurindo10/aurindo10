@@ -1,6 +1,7 @@
 const PriceList = require('../Models/priceList')
 const Listcomparada = require('../Models/listcotada')
 const Vendedor = require('../Models/vendedor')
+const Cotacao = require ('../Models/cotação')
 
 
 const comparador = {
@@ -26,29 +27,52 @@ const comparador = {
                 return prev.valorUnitario < curr.valorUnitario ? prev : curr; 
             })) || null;
          })
-
-         const ListReady = idOfEachSeller.map((i)=>{return (minPrices.filter((e)=>{return e.vendedorId === i}))})
          const VendedorFromDB = await Vendedor.find({})
          const ListReadyToSend = idOfEachSeller.map((e)=>{return VendedorFromDB.filter((i)=>{return i._id == e})}).flat(1)
          const FinalList = ListReadyToSend.map((seller)=>{return {
             nomeDoVendedor: seller.nome ,
             empresa: seller.empresa,
             ProductListToBuy: minPrices.filter((sellerProduct)=>{return sellerProduct.vendedorId == seller._id})}})
-        console.log(FinalList)
 
+        const nomeDaCotacao = await Cotacao.findById(CotacaoId)
+        console.log(nomeDaCotacao)
 
-        const data =  new Listcomparada ({listas:FinalList})
-        // res.send(FinalList)
-
+        const data =  new Listcomparada ({
+            nomeDaCotacao: nomeDaCotacao.cotacaoName,
+            listas:FinalList,
+            idCotacao: CotacaoId
+        })
 
          try{
-                     const savedList = await data.save()
-                     res.send(savedList)
+             const savedList = await data.save()
+            res.send(savedList)
              }
          catch(error){
-             res.status(400).send(error)
+            res.status(400).send(error)
          }
     
-}}
+    },
+    getListReadyById:  async (req, res)=>{
+        const idListComparada  = req.params.id
+        try{
+            const List = await Listcomparada.find({idCotacao:idListComparada})
+        res.send(List)
+            }
+        catch(error){
+        res.status(400).send(error)
+        }
+    },
+    getListsReady:  async (req, res)=>{
+        try{
+            const List = await Listcomparada.find()
+        res.send(List)
+            }
+        catch(error){
+        res.status(400).send(error)
+        }
+    }
+
+
+}
 
 module.exports = comparador
