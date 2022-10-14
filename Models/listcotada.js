@@ -25,7 +25,8 @@ const priceListSchema  = mongoose.Schema({
 const ListaPronta = mongoose.Schema({
     nomeDaCotacao: {type: String, required: true, minlength: 1, maxlenght: 50},
     listas:[priceListSchema],
-    idCotacao: {type: String, required: true, minlength: 1, maxlenght: 50}
+    idCotacao: {type: String, required: true, minlength: 1, maxlenght: 50},
+    createdAt: {type: Date, default: Date.now}
 })
 
 
