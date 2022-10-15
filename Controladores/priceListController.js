@@ -54,13 +54,22 @@ cadastraVendedor:  async(req, res)=>{
     const update = req.body
      console.log(update)
      const data =  new Vendedor (update)
-try{
-    const savedProduct = await data.save()
-    res.send(savedProduct)
-}
-catch(error){
-    res.status(400).send(error)}
-}
+    try{
+        const savedProduct = await data.save()
+        res.send(savedProduct)
+    }
+    catch(error){
+        res.status(400).send(error)}
+    },
+obtemListaDePrecoPorCotacao:  async(req, res)=>{
+    const idCotacao = req.params.id
+    try{
+        const listOfCotacaoById =  await PriceList.find({cotacao_id:idCotacao})
+        res.send(listOfCotacaoById)
+     }
+    catch(error){
+            res.status(400).send(error)}
+     }
 }
 
 

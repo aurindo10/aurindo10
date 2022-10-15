@@ -13,7 +13,7 @@ router.get('/compara/:id', express.urlencoded({extended:true}), comparador.compa
 router.put('/cadastravendedor', express.urlencoded({extended:true}), controller.cadastraVendedor)
 router.get('/obtemlistacomparada/:id', express.urlencoded({extended:true}), comparador.getListReadyById)
 router.get('/obtemtodaslistacomparadas', express.urlencoded({extended:true}), comparador.getListsReady)
-
+router.get('/obtemlistdeprecoporlistadecotacao/:id', express.urlencoded({extended:true}), controller.obtemListaDePrecoPorCotacao)
 
 
 
