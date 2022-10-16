@@ -35,8 +35,8 @@ const user = {
         if (!e) return res.status(400).send({msg:'Email ou senha incorreto'})
         const token = jwt.sign({_id: userEmail._id, admin: userEmail.admin}, process.env.TOKEN_SECRET)
         console.log(process.env.TOKEN_SECRET)
-        res.header('authoriztion-token', token)
-        res.send({msg:'Usuário logado'})})
+        // res.header('authoriztion-token', token)
+        res.send({token_auth: token})})
     }
  
 
