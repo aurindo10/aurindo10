@@ -13,13 +13,13 @@ const user = {
         }
         const userEmail = await User.findOne({email: req.body.email})
         if (userEmail) {
-            return res.status(400).send('Este email já está cadastrado')
+            return res.status(400).send({msg:'Este email já está cadastrado'})
         }
         else {
         const newUser =  new User(data)
         try {
             await newUser.save()
-            res.send('Usuário cadastrado com sucesso')
+            res.send({msg:'Usuário cadastrado com sucesso'})
         }
         
         
@@ -32,11 +32,11 @@ const user = {
         if (!userEmail) return res.status(400).send('Email ou senha incorreto')
         const passwordAndUserMatch = bcrypt.compare(req.body.password, userEmail.password)
         .then((e)=>{
-        if (!e) return res.status(400).send('Email ou senha incorreto')
+        if (!e) return res.status(400).send({msg:'Email ou senha incorreto'})
         const token = jwt.sign({_id: userEmail._id, admin: userEmail.admin}, process.env.TOKEN_SECRET)
         console.log(process.env.TOKEN_SECRET)
         res.header('authoriztion-token', token)
-        res.send('Usuário logado')})
+        res.send({msg:'Usuário logado'})})
     }
  
 
