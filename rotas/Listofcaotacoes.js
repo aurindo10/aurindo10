@@ -14,7 +14,7 @@ router.put('/cadastravendedor', express.urlencoded({extended:true}), controller.
 router.get('/obtemlistacomparada/:id', express.urlencoded({extended:true}), comparador.getListReadyById)
 router.get('/obtemtodaslistacomparadas', express.urlencoded({extended:true}), comparador.getListsReady)
 router.get('/obtemlistdeprecoporlistadecotacao/:id', express.urlencoded({extended:true}), controller.obtemListaDePrecoPorCotacao)
-
+router.delete('/deletalistacomparada/:id', express.urlencoded({extended:true}), comparador.deleteById)
 
 
 module.exports = router;

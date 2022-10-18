@@ -78,8 +78,15 @@ const comparador = {
         catch(error){
         res.status(400).send(error)
         }
+    },
+    deleteById:  async (req, res)=>{
+        idToDelete = req.params.id
+         Listcomparada.findOneAndDelete({idCotacao: idToDelete}, function(err, obj) {
+            if(err) {res.status(400).send(err)
+            }
+        res.status(200).send(obj)
+        })
     }
-
 }
 
 module.exports = comparador
