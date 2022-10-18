@@ -7,6 +7,10 @@ const Cotacao = require ('../Models/cotação')
 const comparador = {
     compara:  async (req, res)=>{
         const CotacaoId = req.params.id
+
+         const listaComparada = await Listcomparada.findOne({idCotacao:CotacaoId})
+         console.log(listaComparada)
+        if(!listaComparada) {
         const cotacoes = await PriceList.find({cotacao_id:CotacaoId})
         const allProductMergedinArrayInsideArray = cotacoes.map((e)=>{
             return (e.listOfProducts.map((i)=>{return i}))
@@ -51,7 +55,11 @@ const comparador = {
             res.status(400).send(error)
          }
     
-    },
+    }
+    else {
+        res.status(401).send({msg: "Lista de compra desta cotacao ja foi gerada"})
+    }}
+    ,
     getListReadyById:  async (req, res)=>{
         const idListComparada  = req.params.id
         try{
@@ -71,7 +79,6 @@ const comparador = {
         res.status(400).send(error)
         }
     }
-
 
 }
 

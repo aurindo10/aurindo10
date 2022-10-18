@@ -14,7 +14,6 @@ const productOfList = mongoose.Schema({
     _id: {type: String, minlength: 3, maxlenght: 50}}) 
 
 
-
 const priceListSchema  = mongoose.Schema({
         
         nomeDoVendedor: {type: String, required: true, minlength: 3, maxlenght: 50},
