@@ -28,7 +28,7 @@ const comparador = {
                 if (!prevOk && !currOk) return {};
                 if (!prevOk) return curr;
                 if (!currOk) return prev;
-                return ((prev.valorUnitario===0?100000: prev.valorUnitario) < (curr.valorUnitario===0?10000:curr.valorUnitario) ? prev : curr); 
+                return ((prev.valorUnitario===0?1000000000: prev.valorUnitario) < (curr.valorUnitario===0?100000000:curr.valorUnitario) ? prev : curr); 
             })) || null;
          })
          const VendedorFromDB = await Vendedor.find({})

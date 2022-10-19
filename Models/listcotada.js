@@ -6,6 +6,7 @@ const productOfList = mongoose.Schema({
 
     productName: {type: String, required: true, minlength: 3, maxlenght: 50},
     product_id : {type: String, required: true, minlength: 3, maxlenght: 50},
+    marca : {type: String, required: true, minlength: 1, maxlenght: 50},
     unidade: {type: String, required: true, minlength: 1, maxlenght: 100},
     quantidade: {type: Number, required: true},
     valorUnitario: {type: Number, required: true},

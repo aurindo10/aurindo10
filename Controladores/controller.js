@@ -34,6 +34,7 @@ const CadastroProduto = {
         const idList = req.params.id;
         const newProduct = {
             name: req.body.name,
+            marca: req.body.marca,
             unidade: req.body.unidade,
             quantidade: req.body.quantidade,
             produto_id: req.body.produto_id
