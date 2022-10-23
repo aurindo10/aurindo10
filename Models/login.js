@@ -5,7 +5,8 @@ const userSchema = mongoose.Schema({
     email: {type: String, required: true, minlength: 3, maxlenght: 100},
     password: {type: String, required: true, minlength: 6, maxlenght: 200},
     createdAt: {type: Date, default: Date.now},
-    admin: {type: Boolean, default: false}})
+    admin: {type: Boolean, default: false},
+    refreshToken:{type: String, minlength: 3, maxlenght: 700}})
 
 
 module.exports = mongoose.model('User', userSchema);

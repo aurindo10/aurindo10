@@ -2,6 +2,8 @@ const express = require ('express')
 const router = express.Router();
 const controller  = require('../Controladores/priceListController')
 const comparador = require('../Controladores/comparador')
+const auth = require('../Controladores/authcontroller')
+const adminAuth = require('../Controladores/adminauthcontroller')
 
 
 router.post('/cadastrodelistadeprecos', express.urlencoded({extended:true}), controller.cadastro)

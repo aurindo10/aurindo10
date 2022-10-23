@@ -31,22 +31,25 @@ const user = {
         const userEmail = await User.findOne({email: req.body.email})
         if (!userEmail) return res.status(400).send('Email ou senha incorreto')
         const passwordAndUserMatch = bcrypt.compare(req.body.password, userEmail.password)
-        .then((e)=>{
-        if (!e) return res.status(400).send({msg:'Email ou senha incorreto'})
-        const token = jwt.sign({_id: userEmail._id, admin: userEmail.admin}, process.env.TOKEN_SECRET)
-        console.log(process.env.TOKEN_SECRET)
-        // res.header('authoriztion-token', token)
-        res.send({token_auth: token})})
+        .then(async (e)=>{
+            if (!e) return res.status(400).send({msg:'Email ou senha incorreto'})
+            const accessToken = jwt.sign(
+                {email: userEmail.email, admin: userEmail.admin},
+                process.env.TOKEN_SECRET,
+                { expiresIn: '30s' }
+            );
+            const refreshToken = jwt.sign(
+                {email: userEmail.email, admin: userEmail.admin},
+                process.env.REFRESH_TOKEN_SECRET,
+                { expiresIn: '1d' }
+            );
+            User.findOneAndUpdate({email: req.body.email}, {refreshToken:refreshToken}, (err, doc)=>{console.log(err)})
+            res.cookie('jwt', refreshToken, { httpOnly: true, sameSite: 'None', secure: true, maxAge: 24 * 60 * 60 * 1000 });
+            res.json({ accessToken })
+            console.log(accessToken);
+        }
+    )
     }
- 
-
-
-
-
-
-
-
-
 }
 
 module.exports = user
