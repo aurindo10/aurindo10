@@ -1,6 +1,4 @@
-<<<<<<< HEAD
-consd asda dsa
-=======
+
 const User = require ('../Models/login')
 const bcrypt = require ('bcryptjs')
 const jwt = require ('jsonwebtoken')
@@ -121,4 +119,4 @@ const user = {
 }
 
 module.exports = user
->>>>>>> origin/teste
+
