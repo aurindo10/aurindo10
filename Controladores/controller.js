@@ -17,6 +17,7 @@ const CadastroProduto = {
 
     }catch (error) {
         res.status(400).send(error)}},
+        
     criarListdeCotação: async (req, res)=>{
         const cotacao = new Cotacao ({
             cotacaoName: req.body.cotacaoName,
@@ -33,6 +34,7 @@ const CadastroProduto = {
         const idList = req.params.id;
         const newProduct = {
             name: req.body.name,
+            marca: req.body.marca,
             unidade: req.body.unidade,
             quantidade: req.body.quantidade,
             produto_id: req.body.produto_id
@@ -43,9 +45,13 @@ const CadastroProduto = {
         Cotacao.findOneAndUpdate(query, update,options, (err, doc) =>{ 
             if (err) {
               throw err;
+              
             }
+            console.log(doc)
+            res.status(200).send(doc.products[doc.products.length-1])
+            // res.send (update.$push.products)
         })
-        res.send ("Produto cadastrado na lista")
+        
     },
     ObtemProdutosDaLista: async (req, res)=>{
 
@@ -148,6 +154,15 @@ const CadastroProduto = {
                     res.send(err)
                 }
                 res.send(doc)
-    })}
+    })},
+    deleteproductofcotacao: async (req, res)=>{
+        const idList = req.params.id
+        const idProduct = req.params.id_product
+        Cotacao.findOneAndUpdate({ _id: idList }, { "$pull": { "products": { "_id": idProduct } }}, { safe: true, multi:true }, function(err, obj) {
+            if(err) res.status(400).send(err)          
+            res.send(obj)
+
+        });}
+        
 }
 module.exports = CadastroProduto;

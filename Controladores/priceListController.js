@@ -1,9 +1,11 @@
 const PriceList = require('../Models/priceList')
+const Vendedor = require('../Models/vendedor')
 
 const cadastroListofPrice =  {
     
 cadastro: async(req, res)=>{
     const update = req.body
+    console.log(update)
     const data =  new PriceList (update)
 try{
             const savedProduct = await data.save()
@@ -47,7 +49,27 @@ deletelist:  async(req, res)=>{
             }
             res.send(doc)
         })
+    },
+cadastraVendedor:  async(req, res)=>{
+    const update = req.body
+     console.log(update)
+     const data =  new Vendedor (update)
+    try{
+        const savedProduct = await data.save()
+        res.send(savedProduct)
     }
+    catch(error){
+        res.status(400).send(error)}
+    },
+obtemListaDePrecoPorCotacao:  async(req, res)=>{
+    const idCotacao = req.params.id
+    try{
+        const listOfCotacaoById =  await PriceList.find({cotacao_id:idCotacao})
+        res.send(listOfCotacaoById)
+     }
+    catch(error){
+            res.status(400).send(error)}
+     }
 }
 
 
