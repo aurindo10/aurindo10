@@ -5,6 +5,8 @@ const allowedOrigins = [
     'http://localhost:3500',
     'https://cotacaots-1qng4mcbt-aurindo10.vercel.app',
     'https://cotacaojs.vercel.app/',
+    'https://cotacaojs-aurindo10.vercel.app/',
+    'https://cotacaojs.vercel.app/'
     
 ];
 
