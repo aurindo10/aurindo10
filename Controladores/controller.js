@@ -4,8 +4,6 @@ const Cotacao = require('../Models/cotação');
 
 const CadastroProduto = {
     cadastro: async (req, res)=>{
-        const selectedProduct = await Produto.findOne({nome: req.body.nome})
-        if (selectedProduct) return res.status(400).send('Esse produto já existe')
         const product = new Produto ({
             nome: req.body.nome,
             marca: req.body.marca,
