@@ -47,12 +47,12 @@ const user = {
                 email: foundUser.email, admin: foundUser.admin
             },
             process.env.TOKEN_SECRET,
-            { expiresIn: '10s' }
+            { expiresIn: '1h' }
         );
         const newRefreshToken = jwt.sign(
             {email: foundUser.email, admin: foundUser.admin},
             process.env.REFRESH_TOKEN_SECRET,
-            { expiresIn: '1d' }
+            { expiresIn: '2d' }
         );
 
         // Changed to let keyword
