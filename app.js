@@ -14,6 +14,7 @@ const corsOptions = require('./Controladores/config/corsOptions')
 const cookieParser = require('cookie-parser');
 const sdlkask =require('./rotas/refresh')
 const credentials = require('./Controladores/config/credentials')
+const transferproduct = require('./rotas/transferProduct')
 
 mongoose.connect('mongodb+srv://aurindo:88190207@cluster0.llc5fu0.mongodb.net/?retryWrites=true&w=majority',(error)=>{ 
     if (error) 
@@ -30,6 +31,7 @@ app.use ('/', express.json(), (admin))
 app.use ('/user', express.json(), (login))
 app.use ('/produto',express.json(), (produto));
 app.use ('/cotacoes',express.json(), (cotacao));
+app.use ('/transferproduct',express.json(), (transferproduct));
 app.use ((req, res, next) => {
     const erro = new Error ('não encontrato');
     erro.status = 404;

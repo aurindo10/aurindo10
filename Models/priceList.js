@@ -13,7 +13,6 @@ const productOfList = mongoose.Schema({
     vendedorId: {type: String, required: true}})
 
 
-
 const priceListSchema  = mongoose.Schema({
         vendedor: {type: String, required: true, minlength: 3, maxlenght: 50},
         empresa: {type: String, required: true, minlength: 3, maxlenght: 50},
