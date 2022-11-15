@@ -3,6 +3,7 @@ const router = express.Router();
 const auth = require('../Controladores/authcontroller')
 const transferProduct = require('../Controladores/transferProduct')
 
+router.post('/:idcotacao/:idSeller/:idproduto', express.urlencoded({extended:true}), transferProduct.transferOneProduct)
 router.get('/:idproduct/:idcotacao', express.urlencoded({extended:true}), auth, transferProduct.valueOfEachProductOnListCotada)
 
 module.exports = router;

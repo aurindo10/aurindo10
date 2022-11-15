@@ -40,7 +40,30 @@ const transferProduct = {
         res.status(200).send(FitelredSellerwithTheProduct)
 
     }catch (error) {
-        res.status(400).send(error)}}}
+        res.status(400).send(error)}},
+
+
+    transferOneProduct : async (req, res)=>{
+        const idCotacao = req.params.idcotacao;
+        const idSeller = req.params.idSeller
+        const idproduto = req.params.idproduto;
+        try {
+            const test =  await Listcomparada.findOne({_id:idCotacao},  
+                function (e, data) {
+                if (e) console.log(e);
+                const deleteProduct = data.listas.id(idSeller).ProductListToBuy.id(idproduto).remove()
+                data.save(function (err) {
+                    if (err) return handleError(err);
+                    console.log('the subdocs were removed');
+                  });
+                console.log(deleteProduct)
+            });
+        }
+        catch(err){
+            res.send('test')
+        }
+    }
+    }
 
 
 module.exports = transferProduct;
