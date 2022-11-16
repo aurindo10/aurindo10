@@ -45,24 +45,67 @@ const transferProduct = {
 
     transferOneProduct : async (req, res)=>{
         const idCotacao = req.params.idcotacao;
-        const idSeller = req.params.idSeller
+        const idSeller = req.params.idSeller;
         const idproduto = req.params.idproduto;
-        try {
-            const test =  await Listcomparada.findOne({_id:idCotacao},  
+
+
+            Listcomparada.findOne({_id:idCotacao},  
                 function (e, data) {
                 if (e) console.log(e);
-                const deleteProduct = data.listas.id(idSeller).ProductListToBuy.id(idproduto).remove()
-                data.save(function (err) {
-                    if (err) return handleError(err);
-                    console.log('the subdocs were removed');
-                  });
-                console.log(deleteProduct)
+                const productToDelete = data.listas.id(idSeller).ProductListToBuy.id(idproduto)
+
+                if(productToDelete){
+                    data.listas.id(idSeller).ProductListToBuy.id(idproduto).remove()
+                    data.save(function (err, doc) {
+                        if (err) return console.log(err);
+                        res.status(200).send('Produto deletado com sucesso')
+                      });
+                }
+                else {
+                    res.status(300).send('produto n existe no banco do de dados')
+                }
             });
-        }
-        catch(err){
-            res.send('test')
-        }
+    
+    },
+    addProduct: async(req, res)=>{
+
+        const idSeller = req.params.idSeller;
+        const idproduto = req.params.idproduto;
+        const idCotacao = req.params.idcotacao;
+
+        const idSellerInsideCotacao = req.params.idSellerInsideCotacao; //adicionar na rota ainda
+        const BuyListIdToAddProduct = req.params.BuyListIdToAddProduct;
+        const SellerIdToBeUpdate =  req.params.SellerIdToBeUpdate;
+
+        Listcomparada.findOne({_id:idCotacao},
+              async function (es, dat) {
+            if (es) console.log(es);
+            const productToDelete = dat.listas.id(idSeller).ProductListToBuy.id(idproduto)
+        const productIdOfProductToLookIntoListCotada = productToDelete.product_id
+        console.log(idSellerInsideCotacao)
+        const productOfSellerListToEnterTheToBuyList = await PriceList.findById(idSellerInsideCotacao)
+
+        const productFound =  productOfSellerListToEnterTheToBuyList.listOfProducts.filter((element)=>{  return element.product_id == productIdOfProductToLookIntoListCotada})
+        console.log(productFound)
+            Listcomparada.findOne({_id:BuyListIdToAddProduct}, 
+                function(e, data){
+                    if (e) console.log(e);
+                    const productToUpdate = data.listas.id(SellerIdToBeUpdate)
+                    if(productToUpdate){
+                        data.listas.id(SellerIdToBeUpdate).ProductListToBuy.push(productFound[0])
+                        data.save(function (err, doc) {
+                            if (err) return console.log(err);
+                            res.status(200).send('Produto adicionado com sucesso')
+                          })
+                    }
+                    else {
+                        res.status(300).send('Nao foi possivel adicionar o produto')}
+
+                })
+            })
+
     }
+
     }
 
 
