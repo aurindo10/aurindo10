@@ -33,8 +33,8 @@ const transferProduct = {
                 vendedor: e.vendedor,
                 productName: product[0].productName,
                 valorUnitario: product[0].valorUnitario,
-                buyListSum: somaTotal.sum
-
+                buyListSum: somaTotal.sum,
+                vendedorID: e._id
             }
         })
         res.status(200).send(FitelredSellerwithTheProduct)
@@ -81,6 +81,7 @@ const transferProduct = {
               async function (es, dat) {
             if (es) console.log(es);
             const productToDelete = dat.listas.id(idSeller).ProductListToBuy.id(idproduto)
+            
         const productIdOfProductToLookIntoListCotada = productToDelete.product_id
         console.log(idSellerInsideCotacao)
         const productOfSellerListToEnterTheToBuyList = await PriceList.findById(idSellerInsideCotacao)
