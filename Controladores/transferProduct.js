@@ -58,7 +58,7 @@ const transferProduct = {
                     data.listas.id(idSeller).ProductListToBuy.id(idproduto).remove()
                     data.save(function (err, doc) {
                         if (err) return console.log(err);
-                        res.status(200).send('Produto deletado com sucesso')
+                        res.status(200).send(doc)
                       });
                 }
                 else {
@@ -105,6 +105,31 @@ const transferProduct = {
                 })
             })
 
+    },
+    updateProductFromBuyList: async (req, res)=>{
+        const idCotacao = req.params.idcotacao;
+        const idSeller = req.params.idSeller;
+        const idproduto = req.params.idproduto;
+        const update = req.body;
+
+
+        Listcomparada.findOne({_id:idCotacao},  
+            function (e, data) {
+            if (e) console.log(e);
+            const productToDelete = data.listas.id(idSeller).ProductListToBuy.id(idproduto)
+
+            if(productToDelete){
+                data.listas.id(idSeller).ProductListToBuy.id(idproduto).set(update);
+                data.save(function (err, doc) {
+                    if (err) return console.log(err);
+                    res.status(200).send('Produto atualizado com sucesso')
+                  });
+            }
+            else {
+                res.status(300).send('produto n existe no banco do de dados')
+            }
+        });
+        
     }
 
     }

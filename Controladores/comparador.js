@@ -63,7 +63,8 @@ const comparador = {
     getListReadyById:  async (req, res)=>{
         const idListComparada  = req.params.id
         try{
-            const List = await Listcomparada.find({idCotacao:idListComparada})
+            const List = await Listcomparada.find({_id:idListComparada})
+            console.log(idListComparada)
         res.send(List)
             }
         catch(error){
