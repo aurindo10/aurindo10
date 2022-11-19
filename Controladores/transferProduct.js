@@ -96,7 +96,7 @@ const transferProduct = {
                         data.listas.id(SellerIdToBeUpdate).ProductListToBuy.push(productFound[0])
                         data.save(function (err, doc) {
                             if (err) return console.log(err);
-                            res.status(200).send('Produto adicionado com sucesso')
+                            res.status(200).send(doc)
                           })
                     }
                     else {
