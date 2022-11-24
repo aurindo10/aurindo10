@@ -15,18 +15,32 @@ const CadastroProduto = {
 
     }catch (error) {
         res.status(400).send(error)}},
-        
+            
     criarListdeCotação: async (req, res)=>{
         const cotacao = new Cotacao ({
             cotacaoName: req.body.cotacaoName,
             products: [],
+            status: req.body.status,
+            sellerAmount: req.body.sellerAmount
         })
     try {
     const savedList = await cotacao.save()
     res.send(savedList)
     }catch (error) {
      res.status(400).send(error)}
-    },
+    }, 
+    
+    updatestatus: async (req, res)=>{
+        const query ={_id:req.params.id}
+        const update = {status: req.body.status}
+        let options = { new: true };
+        Cotacao.findOneAndUpdate(query, update,options, (err, doc) =>{ 
+            if (err) {
+              throw err;
+            }
+            res.status(200).send(doc.status)
+
+        })},
 
     criarProdutosDaLista: async (req, res)=>{
         const idList = req.params.id;

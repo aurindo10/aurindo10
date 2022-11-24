@@ -12,11 +12,12 @@ const productOfCotacao  = mongoose.Schema({
 const cotacaoSchema = new mongoose.Schema({
     cotacaoName: {type: String, required: true, minlength: 3, maxlenght: 50},
     products: [productOfCotacao],
-    createdAt: {type: Date, default: Date.now}
+    createdAt: {type: Date, default: Date.now},
+    status: {type: String, default: 'Editando'},
+    sellerAmount: {type: String,}
 })
 
 
 
 module.exports = mongoose.model('Cotacao', cotacaoSchema)
 
-//dkasjdas

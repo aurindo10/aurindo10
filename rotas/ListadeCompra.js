@@ -9,6 +9,8 @@ router.get('/cotacoes/', express.urlencoded({extended:true}),auth, controller.Ob
 router.delete('/cadastro/:id',express.urlencoded({extended:true}),auth, controller.deleteproduct); 
 router.post('/cadastrodelista/:id', express.urlencoded({extended:true}),auth, controller.criarProdutosDaLista);
 router.post('/cadastrodelista', express.urlencoded({extended:true}),auth, controller.criarListdeCotação);
+router.post('/updatestatus/:id', express.urlencoded({extended:true}),auth, controller.updatestatus);
+
 router.get('/cotacoes/:id', express.urlencoded({extended:true}), controller.ObtemProdutosDaLista )
 router.delete('/cotacoes/:id', express.urlencoded({extended:true}),auth, controller.deletecotacao )
 router.get('/productslist', express.urlencoded({extended:true}),auth, controller.products)

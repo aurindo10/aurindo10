@@ -8,6 +8,7 @@ router.post('/:idcotacao/:idSeller/:idproduto', express.urlencoded({extended:tru
 router.put('/update/:idcotacao/:idSeller/:idproduto', express.urlencoded({extended:true}), transferProduct.updateProductFromBuyList)
 router.post('/:idcotacao/:idSeller/:idproduto/:idSellerInsideCotacao/:BuyListIdToAddProduct/:SellerIdToBeUpdate',express.urlencoded({extended:true}), transferProduct.addProduct)
 
+
 router.get('/:idproduct/:idcotacao', express.urlencoded({extended:true}), auth, transferProduct.valueOfEachProductOnListCotada)
 module.exports = router;
 
